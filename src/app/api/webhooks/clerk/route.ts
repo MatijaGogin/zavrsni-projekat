@@ -4,6 +4,7 @@ import { clerkClient, WebhookEvent } from '@clerk/nextjs/server';
 import { createUser } from '../../../../../actions/user.action';
 import { NextResponse } from 'next/server';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
 
