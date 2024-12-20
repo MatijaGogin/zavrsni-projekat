@@ -5,7 +5,7 @@ import { createUser } from '../../../../../actions/user.action';
 import { NextResponse } from 'next/server';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function POST(req: Request) {
+export async function POST(_req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
 
   if (!SIGNING_SECRET) {
