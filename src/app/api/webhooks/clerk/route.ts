@@ -4,7 +4,6 @@ import { clerkClient, WebhookEvent } from '@clerk/nextjs/server';
 import { createUser } from '../../../../../actions/user.action';
 import { NextResponse } from 'next/server';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
 
@@ -15,7 +14,7 @@ export async function POST(req: Request) {
   // Create new Svix instance with secret
   const wh = new Webhook(SIGNING_SECRET);
 
-  // Get headers
+  // Get headers from next/headers
   const headerPayload = await headers();
   const svix_id = headerPayload.get('svix-id');
   const svix_timestamp = headerPayload.get('svix-timestamp');
@@ -28,8 +27,8 @@ export async function POST(req: Request) {
     });
   }
 
-  // Get body
-  const payload = await req.json();
+  // Get body directly from 'req' and parse it
+  const payload = await req.json();  // Ensure 'req.json()' is used correctly to get body
   const body = JSON.stringify(payload);
 
   let evt: WebhookEvent;
@@ -80,8 +79,9 @@ export async function POST(req: Request) {
       }
     }
 
-    return NextResponse.json({ message: "New user created", user: newUser });
+    return NextResponse.json({ message: 'New user created', user: newUser });
   }
+
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`);
   console.log('Webhook payload:', body);
 
