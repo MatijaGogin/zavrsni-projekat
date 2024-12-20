@@ -57,12 +57,11 @@ export async function POST(req: Request) {
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username || "default_username",
-      photo: image_url || "default_image_url",
+      username: username!,
+      photo: image_url!,
       firstName: first_name,
       lastName: last_name,
     };
-    
 
     console.log(user);
 
